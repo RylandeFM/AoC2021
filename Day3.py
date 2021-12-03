@@ -1,6 +1,6 @@
 inputString = open("Input/Day 3.txt", "r").read().splitlines()
 
-def partOne():
+def solveBoth():
     binList, g, e = [], "", ""
     for line in inputString:
         binList.append(line)
@@ -11,12 +11,6 @@ def partOne():
         e += "1" if s < len(binList)/2 else "0"
 
     print(int(g,2)*int(e,2))
-
-def partTwo():
-    binList = []
-    for line in inputString:
-        binList.append(line)
-
     print(int(findRating(binList[:],"0","1")[0],2)*int(findRating(binList[:],"1","0")[0],2))
 
 def findRating(binList, positive, negative):
@@ -27,5 +21,4 @@ def findRating(binList, positive, negative):
         currentPos += 1
     return binList
 
-partOne()
-partTwo()
+solveBoth()
