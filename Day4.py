@@ -12,7 +12,7 @@ for line in inputString[2:]:
 def solveBoth():
     currentCalled = numbers[:4]
     maxLength = len(boards)
-    for number in numbers:
+    for number in numbers[4:]:
         currentCalled.append(number)
         for board in boards:
             if checkBoard(currentCalled, board):
