@@ -1,5 +1,4 @@
 inputString = open("Input/Day 5.txt", "r").read().splitlines()
-from collections import defaultdict
 
 def partOne():
     points = {}
