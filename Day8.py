@@ -28,9 +28,9 @@ def partTwo():
         numbers[9] = set([x for x in pattern if len(x) == 6 and len(set(x)-key[0]-midAndTopLeft-numbers[1])==1][0])
         key[4] = (bottomAndBottomLeft-numbers[9])
         key[6] = (bottomAndBottomLeft-key[4])
-        numbers[6] = set([x for x in pattern if next(iter(key[2])) not in x and len(x) == 6][0])
-        numbers[3] = set([x for x in pattern if next(iter(key[1])) not in x and next(iter(key[4])) not in x and len(x) == 5][0])
-        numbers[5] = set([x for x in pattern if next(iter(key[2])) not in x and next(iter(key[4])) not in x and len(x) == 5][0])
+        numbers[6] = set([x for x in pattern if len(set(x)-key[2]) == len(x) == 6][0])
+        numbers[3] = set([x for x in pattern if len(set(x)-key[1]-key[4]) == len(x) == 5][0])
+        numbers[5] = set([x for x in pattern if len(set(x)-key[2]-key[4]) == len(x) == 5][0])
     
         #apply code
         decodedOutput = [[number for number,pattern in numbers.items() if set(output[i])==pattern] for i in range(len(output))]
