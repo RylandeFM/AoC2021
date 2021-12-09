@@ -18,19 +18,20 @@ def partOne():
     return lowestPoints
 
 def partTwo(lowestPoints):
-    basinSizeList = []
-    for lowPoint in lowestPoints:
-        pointReviewSet, checkedPoints = set(), []
-        pointReviewSet.add(lowPoint)
-        while len(pointReviewSet) > 0:
-            p = pointReviewSet.pop()
-            checkedPoints.append(p)
-            if p[0] > 0 and (p[0]-1, p[1]) not in checkedPoints and inputList[p[0]-1][p[1]] < 9: pointReviewSet.add((p[0]-1, p[1]))
-            if p[0] < len(inputList)-1 and (p[0]+1, p[1]) not in checkedPoints and inputList[p[0]+1][p[1]] < 9: pointReviewSet.add((p[0]+1, p[1]))
-            if p[1] > 0 and (p[0], p[1]-1) not in checkedPoints and inputList[p[0]][p[1]-1] < 9: pointReviewSet.add((p[0], p[1]-1))
-            if p[1] < len(inputList[0])-1 and (p[0], p[1]+1) not in checkedPoints and inputList[p[0]][p[1]+1] < 9: pointReviewSet.add((p[0], p[1]+1))
-        basinSizeList.append(len(checkedPoints))
+    basinSizeList = [getBasinSize(x) for x in lowestPoints]
     basinSizeList.sort(reverse=True)
     print(basinSizeList[0]*basinSizeList[1]*basinSizeList[2])
+
+def getBasinSize(lowPoint):
+    pointReviewSet, checkedPoints = set(), []
+    pointReviewSet.add(lowPoint)
+    while len(pointReviewSet) > 0:
+        p = pointReviewSet.pop()
+        checkedPoints.append(p)
+        if p[0] > 0 and (p[0]-1, p[1]) not in checkedPoints and inputList[p[0]-1][p[1]] < 9: pointReviewSet.add((p[0]-1, p[1]))
+        if p[0] < len(inputList)-1 and (p[0]+1, p[1]) not in checkedPoints and inputList[p[0]+1][p[1]] < 9: pointReviewSet.add((p[0]+1, p[1]))
+        if p[1] > 0 and (p[0], p[1]-1) not in checkedPoints and inputList[p[0]][p[1]-1] < 9: pointReviewSet.add((p[0], p[1]-1))
+        if p[1] < len(inputList[0])-1 and (p[0], p[1]+1) not in checkedPoints and inputList[p[0]][p[1]+1] < 9: pointReviewSet.add((p[0], p[1]+1))
+    return len(checkedPoints)
 
 partTwo(partOne())
