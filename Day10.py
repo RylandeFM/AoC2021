@@ -14,8 +14,7 @@ def solveBoth():
         else: #incomplete
             autoCompleteScores.append(determineAutocompleteScore(line))
     print(errorScore)
-    autoCompleteScores.sort()
-    print(autoCompleteScores[int((len(autoCompleteScores)-1)/2)])
+    print(sorted(autoCompleteScores)[(len(autoCompleteScores)-1)//2])
 
 def reduceString(line):
     return line.replace("[]","").replace("{}","").replace("()","").replace("<>","")
