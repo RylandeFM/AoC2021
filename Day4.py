@@ -10,8 +10,7 @@ for line in inputString[2:]:
         board.append([int(x) for x in line.strip().replace("  ", " ").split(" ")])
 
 def solveBoth():
-    currentCalled = numbers[:4]
-    maxLength = len(boards)
+    currentCalled, maxLength = numbers[:4], len(boards)
     for number in numbers[4:]:
         currentCalled.append(number)
         for board in boards:
