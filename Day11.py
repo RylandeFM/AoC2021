@@ -5,7 +5,7 @@ for line in inputString:
 
 def solveBoth():
     octopusEnergy, totalFlashes, currentStep, hasFlashed = inputList[:], 0, 0, []
-    while len(hasFlashed) < 100:
+    while len(hasFlashed) < len(octopusEnergy[0])*len(octopusEnergy):
         currentStep += 1
         #increase global energy
         octopusEnergy = [[x+1 for x in line] for line in octopusEnergy]
