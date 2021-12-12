@@ -20,8 +20,7 @@ def solveBoth():
             flashes = getFlashing(octopusEnergy, hasFlashed)
 
         #set energy to 0 for flashed
-        for (x, y) in hasFlashed:
-            octopusEnergy[x][y] = 0
+        for (x, y) in hasFlashed: octopusEnergy[x][y] = 0
 
         totalFlashes += len(hasFlashed)
         if currentStep == 100: print(totalFlashes)
