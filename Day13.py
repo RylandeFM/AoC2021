@@ -1,17 +1,14 @@
-inputString = open("Input/Day 13.txt", "r").read().splitlines()
+inputString = open("Input/Day 13.txt", "r").read()
 
-doneWithPoints, pointMap, folds = False, set(), []
+pointMap, folds = set(), []
 
-for line in inputString:
-    if line == "": 
-        doneWithPoints = True
-    else:
-        if doneWithPoints:
-            axis,place = line.split("along ")[1].split("=")
-            folds.append((axis,int(place)))
-        else:
-            x,y = line.split(",")
-            pointMap.add((int(x),int(y)))
+for line in inputString.split("\n\n")[0].splitlines():
+    x,y = line.split(",")
+    pointMap.add((int(x),int(y)))
+
+for line in inputString.split("\n\n")[1].splitlines():
+    axis,place = line.split("along ")[1].split("=")
+    folds.append((axis,int(place)))
 
 def foldPoints():
     global pointMap
