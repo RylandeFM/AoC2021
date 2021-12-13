@@ -11,26 +11,12 @@ for line in inputString.split("\n\n")[1].splitlines():
     folds.append((axis,int(place)))
 
 def foldPoints():
-    global pointMap
-    firstFold = True
-    for axis, place in folds:
-        newMap = set()
-        if axis == "y":
-            for x, y in pointMap:
-                if y < place:
-                    newMap.add((x, y))
-                else:
-                    newMap.add((x, place-(y-place)))
-        else:
-            for x, y in pointMap:
-                if x < place:
-                    newMap.add((x, y))
-                else:
-                    newMap.add((place-(x-place), y))
-        if firstFold:
-            print(len(newMap))
-            firstFold = False
-        pointMap = newMap
+    for e, fold in enumerate(folds):
+        toFold = [point for point in pointMap if point[0 if fold[0]=="x" else 1] > fold[1]]
+        for x, y in toFold:
+            pointMap.remove((x, y))
+            pointMap.add((x, fold[1]-(y-fold[1])) if fold[0]=="y" else (fold[1]-(x-fold[1]), y))
+        if e == 0: print(len(pointMap))
 
 def printMap():
     outputMap = [[" " for i in range(max([x for x,y in pointMap])+1)] for j in range(max([y for x,y in pointMap])+1)]
