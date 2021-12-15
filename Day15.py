@@ -1,20 +1,20 @@
-from collections import deque
+import heapq
 
 inputString = open("Input/Day 15.txt", "r").read().splitlines()
 grid = [[int(x) for x in line] for line in inputString]
 
 def findRoute(start, end):
-    visited = {}
-    queue = deque([start])
+    visited, queue = {}, [start]
+    heapq.heapify(queue)
 
     while len(queue) > 0:
-        x, y = queue.pop()
+        x, y = heapq.heappop(queue)
         risk = visited.get((x,y), 0)
         for a,b in getNeighbours((x,y), end):
             newRisk = risk + grid[a][b]
             if (a,b) not in visited.keys() or visited[(a, b)] > newRisk:
                 visited[(a, b)] = newRisk
-                queue.appendleft((a,b))
+                heapq.heappush(queue, (a, b))
     print(visited[end])
 
 def getNeighbours(point, end):
