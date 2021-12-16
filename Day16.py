@@ -1,6 +1,6 @@
 from functools import reduce
 
-inputString = open("Input/Day 16.txt", "r").read().splitlines()
+inputString = open("Input/Day 16.txt", "r").read()
 
 def parsePacket(packet, values):
     version, type, packet = int(packet[:3], 2), int(packet[3:6], 2), packet[6:]
@@ -34,6 +34,6 @@ def parsePacket(packet, values):
     if type == 7: return packet, [1 if values[0] == values[1] else 0]
 
 versions, values = [], []
-inputString, values = parsePacket(bin(int(inputString[0], 16))[2:].zfill(len(inputString[0]) * 4), [])
+_, values = parsePacket(bin(int(inputString, 16))[2:].zfill(len(inputString) * 4), [])
 print(sum(versions))
 print(values[0])
