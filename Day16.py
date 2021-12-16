@@ -7,23 +7,19 @@ def parsePacket(packet, values):
     versions.append(version)
     if type == 4:
         literal = ""
-        while packet[0] != "0": 
-            literal += packet[1:5]
-            packet = packet[5:]
-        literal += packet[1:5]
-        values.append(int(literal, 2))
-        return packet[5:], values
+        while packet[0] != "0": literal, packet = literal + packet[1:5], packet[5:]
+        return packet[5:], values + [int(literal + packet[1:5], 2)]
     if packet[0] == "0":
         length, packet = int(packet[1:16], 2), packet[16:]
         subPacket, packet = packet[:length], packet[length:]
         while len(subPacket) != 0 and int(subPacket, 2) > 0: 
             subPacket, subValue = parsePacket(subPacket, [])
-            values += subValue
+            values.append(subValue[0])
     else:
         subPackets, packet = int(packet[1:12], 2), packet[12:]
         for _ in range(subPackets): 
             packet, subValue = parsePacket(packet, [])
-            values += subValue
+            values.append(subValue[0])
 
     if type == 0: return packet, [sum(values)]
     if type == 1: return packet, [reduce((lambda x, y: x * y), values)]
