@@ -2,14 +2,7 @@
 bounds = [135, 155, -102, -78]
 
 def partOne():
-    highestPoint, targetY = 0, [y for y in range(bounds[2], bounds[3]+1)]
-    for y in range(lowestX(bounds[0]), -bounds[2]+1):
-        originalY, yPos = y, 0
-        while yPos not in targetY and yPos > bounds[3]:
-            yPos += y
-            y -= 1
-        if yPos in targetY: highestPoint = max(highestPoint, sum(range(1,originalY+1)))
-    print(highestPoint)
+    print(sum(range(1,-bounds[2])))
 
 def partTwo():
     validStarts = 0
