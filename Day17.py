@@ -1,4 +1,5 @@
-#inputString = open("Input/Day 17.txt", "r").read().splitlines()
+import timeit
+
 bounds = [135, 155, -102, -78]
 
 def partOne():
@@ -9,8 +10,7 @@ def partTwo():
     for originalX in range(lowestX(bounds[0]),bounds[1]+1):
         for originalY in range(bounds[2], -bounds[2]):
             x, y, xpos, ypos = originalX, originalY, 0, 0
-            while x > 0 or ypos > bounds[2]:
-                if xpos > bounds[1]: break
+            while ypos > bounds[2] and xpos < bounds[1]:
                 xpos, ypos = xpos + x, ypos + y
                 x, y = max(0, x - 1), y - 1
                 if bounds[0] <= xpos <= bounds[1] and bounds[2] <= ypos <= bounds[3]:
@@ -24,4 +24,6 @@ def lowestX(target):
     return i - 1
 
 partOne()
+start = timeit.default_timer()
 partTwo()
+print((timeit.default_timer()-start)*1000)
