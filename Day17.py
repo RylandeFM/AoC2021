@@ -1,5 +1,3 @@
-import timeit
-
 bounds = [135, 155, -102, -78]
 
 def partOne():
@@ -24,6 +22,4 @@ def lowestX(target):
     return i - 1
 
 partOne()
-start = timeit.default_timer()
 partTwo()
-print((timeit.default_timer()-start)*1000)
