@@ -10,6 +10,7 @@ def partTwo():
         for originalY in range(bounds[2], -bounds[2]):
             x, y, xpos, ypos = originalX, originalY, 0, 0
             while x > 0 or ypos > bounds[2]:
+                if xpos > bounds[1]: break
                 xpos, ypos = xpos + x, ypos + y
                 x, y = max(0, x - 1), y - 1
                 if bounds[0] <= xpos <= bounds[1] and bounds[2] <= ypos <= bounds[3]:
