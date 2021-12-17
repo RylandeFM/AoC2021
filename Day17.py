@@ -3,7 +3,7 @@ bounds = [135, 155, -102, -78]
 
 def partOne():
     highestPoints, targetY = {}, [y for y in range(bounds[2], bounds[3]+1)]
-    for y in range(1, -bounds[2]+1):
+    for y in range(lowestX(bounds[0]), -bounds[2]+1):
         originalY, yPos = y, 0
         while yPos not in targetY and yPos > bounds[3]:
             yPos += y
