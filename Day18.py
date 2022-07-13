@@ -76,14 +76,7 @@ def getMaximum(snailList):
     return snailList if not isinstance(snailList,list) else max([getMaximum(x) for x in snailList])
 
 def magnitudeSnailNumber(snailNumber):
-    if isinstance(snailNumber[0],int) and isinstance(snailNumber[1],int): 
-        return 3 * snailNumber[0] + 2 * snailNumber[1]
-    elif isinstance(snailNumber[0],int):
-        return 3 * snailNumber[0] + 2 * magnitudeSnailNumber(snailNumber[1])
-    elif isinstance(snailNumber[1],int):
-        return 3 * magnitudeSnailNumber(snailNumber[0]) + 2 * snailNumber[1]
-    else:
-        return 3 * magnitudeSnailNumber(snailNumber[0]) + 2 * magnitudeSnailNumber(snailNumber[1])
+    return 3 * (snailNumber[0] if isinstance(snailNumber[0],int) else magnitudeSnailNumber(snailNumber[0])) + 2 * (snailNumber[1] if isinstance(snailNumber[1],int) else magnitudeSnailNumber(snailNumber[1]))
 
 print(doHomework(inputList))
 print(max([doHomework([inputList[i],inputList[j]]) for i in range(len(inputList)) for j in range(len(inputList)) if i != j]))
