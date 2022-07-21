@@ -4,11 +4,7 @@ inputList = open("Input/Day 18.txt", "r").read().splitlines()
 def doHomework(inputList):
     currentSnailNumber = ""
     for s in inputList:
-        if currentSnailNumber == "":
-            currentSnailNumber = s
-        else:
-            currentSnailNumber = "[" + currentSnailNumber + "," + s + "]"
-            currentSnailNumber = reduceSnailNumber(currentSnailNumber)
+        currentSnailNumber = reduceSnailNumber("[" + currentSnailNumber + "," + s + "]") if currentSnailNumber != "" else s
 
     return magnitudeSnailNumber(json.loads(currentSnailNumber))
 
@@ -67,7 +63,7 @@ def splitSnailNumber(snailNumber):
             left, right, number = snailNumber[:i], snailNumber[i + 2:], int(snailNumber[i:i+2])
             break
 
-    return left + "[" + str(number // 2) + "," + str(number // 2 + (0 if number % 2 == 0 else 1)) + "]" + right
+    return left + "[" + str(number // 2) + "," + str(number // 2 + (number % 2)) + "]" + right
 
 def getDepth(snailList, count = 0):
     return count if not isinstance(snailList,list) else max([getDepth(x,count+1) for x in snailList])
